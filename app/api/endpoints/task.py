@@ -17,3 +17,12 @@ async def get_task():
         "success": True,
         "html": task.html,
     }
+
+
+@router.get("/seed")
+async def seed_task(session:int, task_number:int):
+    seed = session * task_number
+    return {
+        "success": True,
+        "seed": seed
+    }
