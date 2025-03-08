@@ -26,5 +26,5 @@ async def seed_task(session:int, task_number:int):
     task_id_seed = str(uuid.uuid4())
     return {
         "seed": seed,
-        "task_id_seed": task_id_seed
+        "task_id_seed": task_id_seed,
     }
