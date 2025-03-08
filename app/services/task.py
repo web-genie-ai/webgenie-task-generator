@@ -13,11 +13,18 @@ def cached_get_seed(session:int, task_number:int):
     return seed, task_id_seed
 
 
+@db_cache
+def cached_get_task(session:int, task_number:int):
+    return TASK_GENERATOR.get_task()
+
+
 def get_seed(session:int, task_number:int):
     with lock:
         seed, task_id_seed = cached_get_seed(session, task_number)
     return seed, task_id_seed
 
 
-def get_task():
-    return TASK_GENERATOR.get_task()
+def get_task(session:int, task_number:int):
+    with lock:
+        task = cached_get_task(session, task_number)
+    return task
