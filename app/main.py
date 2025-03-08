@@ -14,6 +14,6 @@ def read_root():
     return {"message": "Hello, Webgenie Task Generator!"}
 
 if __name__ == "__main__":
-    #core_loop()
+    core_loop()
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=18000)

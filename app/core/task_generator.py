@@ -8,15 +8,11 @@ from app.constants import (
     MAX_SYNTHETIC_TASK_SIZE,
 )
 from app.datasets.huggingface_dataset import HuggingfaceDataset
-
+from app.datasets.synthetic_dataset import SyntheticDataset
 class TaskGenerator:
     def __init__(self):
         self.datasets = [
-            (HuggingfaceDataset(
-                dataset_name="SALT-NLP/Design2Code-hf", 
-                split="train", 
-                html_column="text"
-            ), 1),
+            (SyntheticDataset(has_ground_truth_html=True), 1),
         ]
         self.tasks = []
         
