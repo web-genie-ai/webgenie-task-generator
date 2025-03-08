@@ -1,3 +1,4 @@
+import uuid
 from fastapi import APIRouter
 from app.core.task_generator import TASK_GENERATOR
 
@@ -21,8 +22,9 @@ async def get_task():
 
 @router.get("/seed")
 async def seed_task(session:int, task_number:int):
-    seed = session * task_number
+    seed = session * (task_number + 5)
+    task_id_seed = str(uuid.uuid4())
     return {
-        "success": True,
-        "seed": seed
+        "seed": seed,
+        "task_id_seed": task_id_seed
     }
