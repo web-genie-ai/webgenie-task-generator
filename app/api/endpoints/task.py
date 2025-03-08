@@ -18,7 +18,7 @@ async def seed_task(session:int, task_number:int):
 
 @router.get("/generate")
 async def generate_task(session:int, task_number:int):
-    task = get_task()
+    html = get_task(session, task_number)
     return {
-        "html": task.html,
+        "html": html,
     }

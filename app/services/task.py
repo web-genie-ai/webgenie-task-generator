@@ -15,7 +15,8 @@ def cached_get_seed(session:int, task_number:int):
 
 @db_cache
 def cached_get_task(session:int, task_number:int):
-    return TASK_GENERATOR.get_task()
+    task = TASK_GENERATOR.get_task()
+    return task.html if task is not None else ""
 
 
 def get_seed(session:int, task_number:int):
