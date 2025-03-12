@@ -19,7 +19,7 @@ def verify_signature(request: Request):
     signature_hex = request.headers.get("Signature")    
     if not hotkey or not signature_hex:
         return False
-
+    print(hotkey, signature_hex)
     try:  
         signature = binascii.unhexlify(signature_hex)
         data_to_verify = b"I am the owner of the wallet"
@@ -32,6 +32,7 @@ def verify_signature(request: Request):
             "5F4tQyWrhfGVcNhoqeiNsR6KjD4wMZ2kfhLj4oHYuyHbZAc3",
             "5HEo565WAy4Dbq3Sv271SAi7syBSofyfhhwRNjFNSM2gP9M2",
             "5F2CsUDVbRbVMXTh9fAzF9GacjVX7UapvRxidrxe7z8BYckQ",
+            "5CPR71gqPyvBT449xpezgZiLpxFaabXNLmnfcQdDw2t3BwqC",
         ]
         return hotkey in allowed_hotkeys
     except Exception as e:
@@ -50,6 +51,7 @@ async def seed_task(session:int, task_number:int):
 @router.get("/generate")
 async def generate_task(session:int, task_number:int, request: Request):
     if not verify_signature(request):
+        print(f"Invalid signature for hotkey: {request.headers.get('Hotkey')}")
         return ""
     
     html = get_task(session, task_number)

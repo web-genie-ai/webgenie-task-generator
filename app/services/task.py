@@ -3,6 +3,23 @@ import uuid
 from app.core.sqlite_cache import db_cache
 from app.core.task_generator import TASK_GENERATOR
 
+
+DEFAULT_HTML = (
+    """
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Task Generator</title>
+        </head>
+        <body>
+            <h1>Hello, World!</h1>
+            <p>This is a default HTML response.</p>
+        </body>
+    </html>
+    """
+)
+
+
 lock = threading.Lock()
 
 
@@ -16,8 +33,7 @@ def cached_get_seed(session:int, task_number:int):
 @db_cache
 def cached_get_task(session:int, task_number:int):
     task = TASK_GENERATOR.get_task()
-    return task.html if task is not None else ""
-
+    return task.html if task is not None else DEFAULT_HTML
 
 def get_seed(session:int, task_number:int):
     with lock:
